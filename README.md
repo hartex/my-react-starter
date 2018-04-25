@@ -1,2 +1,3 @@
 # my-react-starter
-common React starter pack
+
+Common React + Redux starter pack

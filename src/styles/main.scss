@@ -1,0 +1,52 @@
+@import "vendor";
+@import "fonts";
+@import "colors";
+
+//global styles goes here:
+
+* {
+  box-sizing: inherit;
+}
+
+body, html {
+  font-family: "Noto Sans", serif;
+  font-size: 14px;
+  min-height: 100% !important;
+  height: 100%;
+  background: $color-background-layout;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 30px;
+  color: #262626;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+h3 {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+hr {
+  margin-top: 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
