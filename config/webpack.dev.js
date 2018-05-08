@@ -8,15 +8,23 @@ module.exports = webpackMerge(commonConfig({ENV: ENV}), {
 
   devtool: 'cheap-module-eval-source-map',
 
+  mode: 'development',
+
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader',
+        use: [
+          'style-loader',
+          {
+            loader: "css-loader",
+          },
+          'resolve-url-loader',
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [helpers.root('src', 'styles')]
+              includePaths: [helpers.root('src', 'styles')],
+              sourceMap: true
             }
           }
         ],
@@ -31,12 +39,9 @@ module.exports = webpackMerge(commonConfig({ENV: ENV}), {
     contentBase: './dist',
     proxy: {
       // following URL can be used for development:
-      // '/profiler/': 'http://dep-id-ci.netcracker.com:3030'
+      // '/some-url/': 'https://google.com'
     },
     watchOptions: {
-      // if you're using Docker you may need this
-      // aggregateTimeout: 300,
-      // poll: 1000,
       ignored: /node_modules/
     }
   }

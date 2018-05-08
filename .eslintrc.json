@@ -1,0 +1,40 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base",
+    "eslint-config-airbnb-base/rules/strict",
+    "eslint-config-airbnb/rules/react"
+  ],
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "import/first": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 140
+      }
+    ],
+    "no-param-reassign": "off",
+    "default-case": "off",
+    "padded-blocks": "off",
+    "react/jsx-closing-bracket-location": "off",
+    "react/prop-types": "off"
+  }
+}

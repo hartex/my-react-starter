@@ -1,7 +1,5 @@
 const helpers = require('./helpers');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 
@@ -15,6 +13,14 @@ module.exports = function (options) {
       /*polyfills: './src/polyfills.js',
       vendor: './src/vendor.js',*/
       app: './src/main.jsx',
+    },
+
+    output: {
+      path: helpers.root('dist'),
+      publicPath: '/',
+      filename: '[name].[hash].bundle.js',
+      sourceMapFilename: '[file].map',
+      chunkFilename: '[name].[chunkhash].chunk.js'
     },
 
     resolve: {
@@ -42,57 +48,39 @@ module.exports = function (options) {
         },
 
         /**
-         * File loader for supporting images, for example, in CSS files.
+         * File loader for supporting images and svg, for example.
          */
-        /*{
-          test: /\.(jpg|png|gif)$/,
-          use: 'file-loader'
-        },*/
-
-        /**
-         * File loader for supporting fonts, for example, in CSS files.
-         */
-        /*{
-          test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-          loader: 'file-loader?name=fonts/[name].[ext]'
-        },*/
+        {
+          test: /\.(png|svg|gif|ico)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'img/',
+              name: '[name].[ext]',
+            }
+          }
+        },
 
         /**
          * File loader for supporting fonts
          */
         {
-          test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000'
+          test: /\.(woff(2)?|eot|ttf)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'fonts/',
+              name: '[name].[ext]'
+            }
+          }
         }
       ],
     },
 
     plugins: [
-      new CleanWebpackPlugin(['dist']),
-
-      /**
-       * Copies project static assets.
-       */
-      new CopyWebpackPlugin([{from: 'img', to: 'img'}]),
-
-      /**
-       * Simplifies creation of HTML files to serve your webpack bundles.
-       * This is especially useful for webpack bundles that include a hash in the filename
-       * which changes every compilation.
-       */
       new HtmlWebpackPlugin({
         template: 'src/index.html'
       }),
-
-      /**
-       * Plugin: DefinePlugin
-       * Description: Define free variables.
-       * Useful for having development builds with debug logging or adding global constants.
-       *
-       * Environment helpers
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-       */
-      // NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
       new DefinePlugin({
         'process.env': {
           'ENV': JSON.stringify(ENV),
@@ -100,6 +88,5 @@ module.exports = function (options) {
         }
       })
     ]
-
   };
 };
