@@ -1,4 +1,6 @@
 /dist
 /node_modules
-/src/styles
 /src/index.html
+*.scss
+*.spec.js
+*.spec.js.snap
