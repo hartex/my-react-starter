@@ -10,8 +10,6 @@ module.exports = function (options) {
   return {
 
     entry: {
-      /*polyfills: './src/polyfills.js',
-      vendor: './src/vendor.js',*/
       app: './src/main.jsx',
     },
 
@@ -37,6 +35,19 @@ module.exports = function (options) {
        * An array of directory names to be resolved to the current directory
        */
       modules: [helpers.root('src'), helpers.root('node_modules')]
+    },
+
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /node_modules/,
+            chunks: 'initial',
+            name: 'vendor',
+            enforce: true
+          },
+        }
+      }
     },
 
     module: {

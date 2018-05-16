@@ -1,10 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import AppStore from "~/store/store";
+import AppStore from "~/store";
 
 const App = (props) => (
   <Provider store={AppStore}>
-    <div>App</div>
+    <React.StrictMode>
+      <h1>React starter pack</h1>
+    </React.StrictMode>
   </Provider>
 );
 
