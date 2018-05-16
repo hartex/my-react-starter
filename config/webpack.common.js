@@ -1,6 +1,7 @@
 const helpers = require('./helpers');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlPlugin = require('script-ext-html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 module.exports = function (options) {
@@ -91,6 +92,9 @@ module.exports = function (options) {
     plugins: [
       new HtmlWebpackPlugin({
         template: 'src/index.html'
+      }),
+      new ScriptExtHtmlPlugin({
+        defaultAttribute: 'defer'
       }),
       new DefinePlugin({
         'process.env': {
